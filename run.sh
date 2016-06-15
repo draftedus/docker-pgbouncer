@@ -20,6 +20,9 @@ max_client_conn = ${PG_MAX_CLIENT_CONN}
 default_pool_size = ${PG_DEFAULT_POOL_SIZE}
 ignore_startup_parameters = extra_float_digits
 server_idle_timeout = ${PG_SERVER_IDLE_TIMEOUT}
+log_connections = 0
+log_disconnections = 0
+stats_period = 0
 EOF
 
 
