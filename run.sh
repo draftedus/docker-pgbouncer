@@ -22,7 +22,7 @@ ignore_startup_parameters = extra_float_digits
 server_idle_timeout = ${PG_SERVER_IDLE_TIMEOUT}
 log_connections = 0
 log_disconnections = 0
-stats_period = 0
+stats_period = 3600
 EOF
 
 
