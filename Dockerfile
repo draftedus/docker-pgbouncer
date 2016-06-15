@@ -6,7 +6,7 @@ RUN yum install -y pgbouncer
 
 ENV PG_MAX_CLIENT_CONN 500
 ENV PG_DEFAULT_POOL_SIZE 200
-ENV PG_SERVER_IDLE_TIMEOUT 240
+ENV PG_SERVER_IDLE_TIMEOUT 500
 ADD run.sh /usr/local/bin/run-pgbouncer
 
 RUN chmod +x /usr/local/bin/run-pgbouncer \ 
