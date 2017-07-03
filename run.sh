@@ -31,6 +31,7 @@ EOF
 echo '"'"${PG_USER}"'"'  > /etc/pgbouncer/userlist.txt
 
 chown -R app:app /etc/pgbouncer
+mkdir -p /var/log/postgresql
 chown root:app /var/log/postgresql
 chmod 1775 /var/log/postgresql
 chmod 640 /etc/pgbouncer/userlist.txt
