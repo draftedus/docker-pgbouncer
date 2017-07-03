@@ -7,7 +7,7 @@ cat << EOF > /etc/pgbouncer/pgbconf.ini
 * = host=${PG_ADDR} port=${PG_PORT} user=${PG_USER} auth_user=${PG_USER} password=${PG_PASS}
 
 [pgbouncer]
-;logfile = /var/log/postgresql
+logfile = /var/log/postgresql
 pidfile = /var/run/postgresql/pgbouncer.pid
 listen_addr = 0.0.0.0
 listen_port = 6432
@@ -24,12 +24,15 @@ log_connections = 0
 log_disconnections = 0
 stats_period = 3600
 server_tls_sslmode=allow
+verbose=2
 EOF
 
 
 echo '"'"${PG_USER}"'"'  > /etc/pgbouncer/userlist.txt
 
 chown -R app:app /etc/pgbouncer
+chown root:app /var/log/postgresql
+chmod 1775 /var/log/postgresql
 chmod 640 /etc/pgbouncer/userlist.txt
 
 /usr/bin/pgbouncer -u app /etc/pgbouncer/pgbconf.ini
