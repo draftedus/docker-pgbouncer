@@ -4,7 +4,7 @@ set -e
 
 cat << EOF > /etc/pgbouncer/pgbconf.ini
 [databases]
-d813ar4djnrejq = host=${PG_ADDR} port=${PG_PORT} dbname=d813ar4djnrejq user=${PG_USER} auth_user=${PG_USER} password=${PG_PASS}
+* = host=${PG_ADDR} port=${PG_PORT} user=${PG_USER} auth_user=${PG_USER}
 
 [pgbouncer]
 ;logfile = /var/log/postgresql
