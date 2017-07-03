@@ -4,7 +4,7 @@ set -e
 
 cat << EOF > /etc/pgbouncer/pgbconf.ini
 [databases]
-* = host=${PG_ADDR} port=${PG_PORT}
+* = host=${PG_ADDR} port=${PG_PORT} user=${PG_USER} password=${PG_PASS}
 
 [pgbouncer]
 ;logfile = /var/log/postgresql
@@ -26,11 +26,9 @@ stats_period = 3600
 EOF
 
 
-echo '"'"${PG_USER}"'" "'"${PG_PASS}"'"'  > /etc/pgbouncer/userlist.txt
+echo '"'"${PGBOUNCER_USER}"'" "'"${PGBOUNCER_PASS}"'"'  > /etc/pgbouncer/userlist.txt
 
 chown -R app:app /etc/pgbouncer
-#chown root:app /var/log/postgresql
-#chmod 1775 /var/log/postgresql
 chmod 640 /etc/pgbouncer/userlist.txt
 
 /usr/bin/pgbouncer -u app /etc/pgbouncer/pgbconf.ini
