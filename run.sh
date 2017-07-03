@@ -28,7 +28,7 @@ verbose=2
 EOF
 
 
-echo '"${PG_USER}" "${PG_PASS}"'  > /etc/pgbouncer/userlist.txt
+echo '"'${PG_USER}'" "'${PG_PASS}'"'  > /etc/pgbouncer/userlist.txt
 
 chown -R app:app /etc/pgbouncer
 mkdir -p /var/log/postgresql
