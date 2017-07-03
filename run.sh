@@ -12,7 +12,7 @@ pidfile = /var/run/postgresql/pgbouncer.pid
 listen_addr = 0.0.0.0
 listen_port = 6432
 unix_socket_dir = /var/run/postgresql
-auth_type = md5
+auth_type = trust
 auth_file = /etc/pgbouncer/userlist.txt
 pool_mode = session
 server_reset_query = DISCARD ALL
@@ -27,7 +27,7 @@ server_tls_sslmode=allow
 EOF
 
 
-echo '"'"${PGBOUNCER_USER}"'" "'"${PGBOUNCER_PASS}"'"'  > /etc/pgbouncer/userlist.txt
+echo '"'"${PG_USER}"'"'  > /etc/pgbouncer/userlist.txt
 
 chown -R app:app /etc/pgbouncer
 chmod 640 /etc/pgbouncer/userlist.txt
