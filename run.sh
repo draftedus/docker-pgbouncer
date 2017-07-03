@@ -7,7 +7,7 @@ cat << EOF > /etc/pgbouncer/pgbconf.ini
 * = host=${PG_ADDR} port=${PG_PORT} user=${PG_USER} auth_user=${PG_USER} password=${PG_PASS}
 
 [pgbouncer]
-logfile = /var/log/postgresql
+logfile = /var/log/postgresql/logging.txt
 pidfile = /var/run/postgresql/pgbouncer.pid
 listen_addr = 0.0.0.0
 listen_port = 6432
