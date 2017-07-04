@@ -76,5 +76,6 @@ mkdir -p /var/log/postgresql
 chown root:app /var/log/postgresql
 chmod 1775 /var/log/postgresql
 chmod 640 /etc/pgbouncer/userlist.txt
+ls -ltr /etc/pgbouncer/keys
 
 /usr/bin/pgbouncer -u app /etc/pgbouncer/pgbconf.ini
