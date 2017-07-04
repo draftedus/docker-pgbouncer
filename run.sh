@@ -44,6 +44,7 @@ client_tls_key_file = ${PGBOUNCER_CLIENT_TLS_KEY_FILE}
 client_tls_cert_file = ${PGBOUNCER_CLIENT_TLS_CERT_FILE}
 client_tls_ca_file = ${PGBOUNCER_CLIENT_TLS_CA_FILE}
 client_tls_protocols = ${PGBOUNCER_TLS_PROTOCOLS:-secure}
+verbose=${PGBOUNCER_VERBOSITY:-2}
 [databases]
 EOFEOF
 
