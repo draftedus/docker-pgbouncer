@@ -52,17 +52,7 @@ do
   IFS=':' read DB_USER DB_PASS DB_HOST DB_PORT DB_NAME <<< $(echo $POSTGRES_URL_VALUE | perl -lne 'print "$1:$2:$3:$4:$5" if /^postgres(?:ql)?:\/\/([^:]*):([^@]*)@(.*?):(.*?)\/(.*?)$/')
 
   DB_MD5_PASS="md5"`echo -n ${DB_PASS}${DB_USER} | md5sum | awk '{print $1}'`
-
   CLIENT_DB_NAME="db${n}"
-
-  echo "Setting ${POSTGRES_URL}_PGBOUNCER config var"
-
-  if [ "$PGBOUNCER_PREPARED_STATEMENTS" == "false" ]
-  then
-    export ${POSTGRES_URL}_PGBOUNCER=postgres://$DB_USER:$DB_PASS@127.0.0.1:6000/$CLIENT_DB_NAME?prepared_statements=false
-  else
-    export ${POSTGRES_URL}_PGBOUNCER=postgres://$DB_USER:$DB_PASS@127.0.0.1:6000/$CLIENT_DB_NAME
-  fi
 
   cat >> /etc/pgbouncer/userlist.txt << EOFEOF
 "$DB_USER" "$DB_MD5_PASS"
