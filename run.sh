@@ -52,7 +52,8 @@ do
   IFS=':' read DB_USER DB_PASS DB_HOST DB_PORT DB_NAME <<< $(echo $POSTGRES_URL_VALUE | perl -lne 'print "$1:$2:$3:$4:$5" if /^postgres(?:ql)?:\/\/([^:]*):([^@]*)@(.*?):(.*?)\/(.*?)$/')
 
   DB_MD5_PASS="md5"`echo -n ${DB_PASS}${DB_USER} | md5sum | awk '{print $1}'`
-  CLIENT_DB_NAME="db${n}"
+#  CLIENT_DB_NAME="db${n}"
+  CLIENT_DB_NAME=$DB_NAME
 
   cat >> /etc/pgbouncer/userlist.txt << EOFEOF
 "$DB_USER" "$DB_MD5_PASS"
