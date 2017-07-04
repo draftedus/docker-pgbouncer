@@ -39,7 +39,6 @@ log_disconnections = ${PGBOUNCER_LOG_DISCONNECTIONS:-1}
 log_pooler_errors = ${PGBOUNCER_LOG_POOLER_ERRORS:-1}
 stats_period = ${PGBOUNCER_STATS_PERIOD:-60}
 server_tls_sslmode=allow
-verbose=2
 [databases]
 EOFEOF
 
@@ -48,11 +47,11 @@ EOFEOF
 
 for POSTGRES_URL in $POSTGRES_URLS
 do
+
   POSTGRES_URL_VALUE=$POSTGRES_URL
   IFS=':' read DB_USER DB_PASS DB_HOST DB_PORT DB_NAME <<< $(echo $POSTGRES_URL_VALUE | perl -lne 'print "$1:$2:$3:$4:$5" if /^postgres(?:ql)?:\/\/([^:]*):([^@]*)@(.*?):(.*?)\/(.*?)$/')
 
   DB_MD5_PASS="md5"`echo -n ${DB_PASS}${DB_USER} | md5sum | awk '{print $1}'`
-#  CLIENT_DB_NAME="db${n}"
   CLIENT_DB_NAME=$DB_NAME
 
   cat >> /etc/pgbouncer/userlist.txt << EOFEOF
