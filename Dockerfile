@@ -5,7 +5,6 @@ RUN curl -o pgdg-centos.rpm https://download.postgresql.org/pub/repos/yum/9.4/re
 RUN yum install -y pgbouncer
 
 ADD run.sh /usr/local/bin/run-pgbouncer
-COPY ./keys/ /etc/pgbouncer/keys/
 
 RUN chmod +x /usr/local/bin/run-pgbouncer \
   && mkdir -p /var/run/postgresql/ \
