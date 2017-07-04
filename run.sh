@@ -76,8 +76,6 @@ mkdir -p /var/log/postgresql
 chown root:app /var/log/postgresql
 chmod 1775 /var/log/postgresql
 chmod 640 /etc/pgbouncer/userlist.txt
-
-echo "Found key file: $PGBOUNCER_CLIENT_TLS_KEY_FILE"
-ls -ltr /etc/pgbouncer/keys
+chmod -R 640 /etc/pgbouncer/keys
 
 /usr/bin/pgbouncer -u app /etc/pgbouncer/pgbconf.ini
