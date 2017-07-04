@@ -13,7 +13,7 @@ if [ -z "${SERVER_RESET_QUERY}" ] &&  [ "$POOL_MODE" == "session" ]; then
   SERVER_RESET_QUERY="DISCARD ALL;"
 fi
 
-cat >> /etc/pgbouncer/pgbconf.ini << EOFEOF
+cat > /etc/pgbouncer/pgbconf.ini << EOFEOF
 [pgbouncer]
 listen_addr = 0.0.0.0
 listen_port = 6432
@@ -41,6 +41,9 @@ stats_period = ${PGBOUNCER_STATS_PERIOD:-60}
 server_tls_sslmode=allow
 verbose=2
 [databases]
+EOFEOF
+
+cat > /etc/pgbouncer/userlist.txt << EOFEOF
 EOFEOF
 
 for POSTGRES_URL in $POSTGRES_URLS
