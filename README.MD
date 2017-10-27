@@ -1,19 +1,23 @@
 draftedus/docker-pgbouncer
 ==================
 
-*Based on Heroku's buildpack for pgbouncer found here:*
+## Intro
+
+**Based on Heroku's buildpack for pgbouncer found here:**
+
 https://github.com/heroku/heroku-buildpack-pgbouncer
 
-*Based on Logicify's dockerized version of pgbouncer found here:*
+**Based on Logicify's dockerized version of pgbouncer found here:**
+
 https://github.com/Logicify/docker-pgbouncer
 
-_pgbouncer runs in CentOS 7_
+## Configuration:
 
-Available variables (thanks Heroku):
+Available environment variables:
 
 | Variable        | Description                   | Default Value                 |
 | --------------- | ----------------------------- | ----------------------------- |
-| PGBOUNCER_URLS  | Comma separated list of psql URIs to proxy | 
+| PGBOUNCER_URLS  | Comma separated list of psql URIs to proxy | |
 | PGBOUNCER_VERBOSITY | Number from 0-2 to determine log verbosity | 2 |
 | PGBOUNCER_POOL_MODE | Specifies when a server connection can be reused by other clients | 'transaction' |
 | PGBOUNCER_MAX_CLIENT_CONN | Maximum number of clients allowed to connected to pgbouncer | 100 |
