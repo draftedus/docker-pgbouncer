@@ -5,9 +5,14 @@ RUN curl -o pgdg-centos.rpm https://download.postgresql.org/pub/repos/yum/9.4/re
 RUN yum install -y pgbouncer
 
 ADD run.sh /usr/local/bin/run-pgbouncer
+RUN chmod +x /usr/local/bin/run-pgbouncer && mkdir -p /var/run/postgresql/ && chown app:app /var/run/postgresql
 
-RUN chmod +x /usr/local/bin/run-pgbouncer \
-  && mkdir -p /var/run/postgresql/ \
-  && chown app:app /var/run/postgresql
+# Increate ulimit file for max connections
+cat >> /etc/security/limits.d/pgbouncer.conf << EOFEOF
+*    soft    nofile 8192
+*    hard    nofile 8192
+EOFEOF
+
 EXPOSE 6432
+
 CMD ["/usr/local/bin/run-pgbouncer"]
