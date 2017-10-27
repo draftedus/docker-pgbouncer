@@ -1,19 +1,37 @@
-Logicify/pgbouncer
+draftedus/docker-pgbouncer
 ==================
 
-Docker image for pgbouncer based on centos7
+*Based on Heroku's buildpack for pgbouncer found here:*
+https://github.com/heroku/heroku-buildpack-pgbouncer
 
-To pull this image:
-`docker pull logicify/pgbouncer`
+*Based on Logicify's dockerized version of pgbouncer found here:*
+https://github.com/Logicify/docker-pgbouncer
 
-Avaliable variables:
+_pgbouncer runs in CentOS 7_
 
-| Variable        | Description                   |
-|:---------------:|:-----------------------------:|
-| PG_ADDR         | Host name of IP of the real postgres server   |
-| PG_PORT         | Port of the of IP of the real postgres server |
-| PG_USER         | Name of the user to be used to connect to postgresql server |
-| PG_PASS         | Password of the user to be used to connect to postgresql server |
-| PG_MAX_CLIENT_CONN | Maximum number of client connections allowed. When increased then the file descriptor limits should also be increased. Theoretical maximum used is: ```max_client_conn + (max_pool_size * total_databases * total_users)``` Default: 500|
-| PG_DEFAULT_POOL_SIZE | How many server connections to allow per user/database pair. Default: 200 |
-| PG_SERVER_IDLE_TIMEOUT | If a server connection has been idle more than this many seconds it will be dropped. If 0 then timeout is disabled. Default: 500 |
+Available variables (thanks Heroku):
+
+| Variable        | Description                   | Default Value                 |
+| --------------- | ----------------------------- | ----------------------------- |
+| PGBOUNCER_URLS  | Comma separated list of psql URIs to proxy | 
+| PGBOUNCER_VERBOSITY | Number from 0-2 to determine log verbosity | 2 |
+| PGBOUNCER_POOL_MODE | Specifies when a server connection can be reused by other clients | 'transaction' |
+| PGBOUNCER_MAX_CLIENT_CONN | Maximum number of clients allowed to connected to pgbouncer | 100 |
+| PGBOUNCER_DEFAULT_POOL_SIZE | Connections allowed "per user per database" | 20 |
+| PGBOUNCER_MIN_POOL_SIZE | Opens connections to the database if the connections dip below this number | 0 |
+| PGBOUNCER_RESERVE_POOL_SIZE | Number of connections allowed as backup if all connections are taken | 0 |
+| PGBOUNCER_RESERVE_POOL_TIMEOUT | If a connection isn't serviced in X seconds, use a reserve connection if available | 5.0 |
+| PGBOUNCER_SERVER_LIFETIME | TTL in seconds of connections to the pgbouncer proxy | 3600 |
+| PGBOUNCER_SERVER_IDLE_TIMEOUT | TTL in seconds of idle connections to the pgbouncer proxy | 600 |
+| PGBOUNCER_LOG_CONNECTIONS | Log whether a successful connection was made or not | 1 |
+| PGBOUNCER_LOG_DISCONNECTIONS | Log whether or not a connection fails | 1 |
+| PGBOUNCER_LOG_POOLER_ERRORS | Log if an error occurred with the pooler | 1 |
+| PGBOUNCER_STATS_PERIOD | Amount of time in seconds to wait to buffer the stats to write to a log | 60 |
+| PGBOUNCER_SERVER_TLS_SSLMODE | SSLMODE for the pgbouncer connection to the original psql URIs | require |
+| PGBOUNCER_CLIENT_TLS_SSLMODE | SSLMODE for the client connections (your app) to the pgbouncer proxy | require |
+| PGBOUNCER_CLIENT_TLS_KEY_FILE | TLS key file to use for SSL connections | |
+| PGBOUNCER_CLIENT_TLS_CERT_FILE | TLS cert file to use for SSL connections | |
+| PGBOUNCER_CLIENT_TLS_CA_FILE | Certificate Authority to use for SSL connections | |
+
+If you are curious what any of these options mean, visit the `pgbouncer` docs here:
+https://pgbouncer.github.io/config.html
