@@ -37,5 +37,18 @@ Available environment variables:
 | PGBOUNCER_CLIENT_TLS_CERT_FILE | TLS cert file to use for SSL connections | |
 | PGBOUNCER_CLIENT_TLS_CA_FILE | Certificate Authority to use for SSL connections | |
 
+## TLS
+
+If you are going to use TLS (**which we HIGHLY recommend**), mount a volume via Docker that points to `/etc/pgbouncer/keys/` and point your environment
+variables to files in that folder. The folder `/etc/pgbouncer/keys` is CHMOD'd appropriately to work with `pgbouncer`.
+
+**Example:**
+
+```
+PGBOUNCER_CLIENT_TLS_KEY_FILE=/etc/pgbouncer/keys/server.key
+PGBOUNCER_CLIENT_TLS_CERT_FILE=/etc/pgbouncer/keys/STAR_example_com.crt
+PGBOUNCER_CLIENT_TLS_CA_FILE=/etc/pgbouncer/keys/STAR_example_com.crt
+```
+
 If you are curious what any of these options mean, visit the `pgbouncer` docs here:
 https://pgbouncer.github.io/config.html
