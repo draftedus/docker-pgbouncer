@@ -17,7 +17,7 @@ Available environment variables:
 
 | Variable        | Description                   | Default Value                 |
 | --------------- | ----------------------------- | ----------------------------- |
-| PGBOUNCER_URLS  | Comma separated list of psql URIs to proxy | |
+| PGBOUNCER_URLS  | Comma separated list of psql URIs to proxy | ${DATABASE_URL} |
 | PGBOUNCER_VERBOSITY | Number from 0-2 to determine log verbosity | 2 |
 | PGBOUNCER_POOL_MODE | Specifies when a server connection can be reused by other clients | 'transaction' |
 | PGBOUNCER_MAX_CLIENT_CONN | Maximum number of clients allowed to connected to pgbouncer | 100 |
