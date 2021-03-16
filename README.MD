@@ -31,6 +31,8 @@ Available environment variables:
 | PGBOUNCER_LOG_DISCONNECTIONS | Log whether or not a connection fails | 1 |
 | PGBOUNCER_LOG_POOLER_ERRORS | Log if an error occurred with the pooler | 1 |
 | PGBOUNCER_STATS_PERIOD | Amount of time in seconds to wait to buffer the stats to write to a log | 60 |
+| PGBOUNCER_STATS_USER | User that is allowed to collect stats | datadog |
+| PGBOUNCER_STATS_PASSWORD | Password used to connect to states | datadog |
 | PGBOUNCER_SERVER_TLS_SSLMODE | SSLMODE for the pgbouncer connection to the original psql URIs | require |
 | PGBOUNCER_CLIENT_TLS_SSLMODE | SSLMODE for the client connections (your app) to the pgbouncer proxy | require |
 | PGBOUNCER_CLIENT_TLS_KEY_FILE | TLS key file to use for SSL connections | |

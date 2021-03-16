@@ -38,6 +38,7 @@ log_connections = ${PGBOUNCER_LOG_CONNECTIONS:-1}
 log_disconnections = ${PGBOUNCER_LOG_DISCONNECTIONS:-1}
 log_pooler_errors = ${PGBOUNCER_LOG_POOLER_ERRORS:-1}
 stats_period = ${PGBOUNCER_STATS_PERIOD:-60}
+stats_users = ${PGBOUNCER_STATS_USER:-datadog}
 server_tls_sslmode=${PGBOUNCER_SERVER_TLS_SSLMODE:-require}
 client_tls_sslmode=${PGBOUNCER_CLIENT_TLS_SSLMODE:-require}
 client_tls_key_file = ${PGBOUNCER_CLIENT_TLS_KEY_FILE}
@@ -48,7 +49,10 @@ verbose=${PGBOUNCER_VERBOSITY:-2}
 [databases]
 EOFEOF
 
+STATS_MD5_PASS="md5"`echo -n ${PGBOUNCER_STATS_USER:-datadog}${PGBOUNCER_STATS_PASSWORD:-datadog} | md5sum | awk '{print $1}'`
+
 cat > /etc/pgbouncer/userlist.txt << EOFEOF
+"${PGBOUNCER_STATS_USER:-datadog}" "${STATS_MD5_PASS}"
 EOFEOF
 
 for POSTGRES_URL in $POSTGRES_URLS
@@ -71,11 +75,9 @@ EOFEOF
   let "n += 1"
 done
 
-chown -R app:app /etc/pgbouncer
 mkdir -p /var/log/postgresql
 chown root:app /var/log/postgresql
 chmod 1775 /var/log/postgresql
 chmod 640 /etc/pgbouncer/userlist.txt
-chmod -R 640 /etc/pgbouncer/keys
 
 /usr/bin/pgbouncer -u app /etc/pgbouncer/pgbconf.ini
